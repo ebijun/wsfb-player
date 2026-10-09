@@ -18,9 +18,17 @@ It runs without X11, Wayland, or legacy OpenMAX APIs.
 - `eval_cpu_decode.c`: Benchmark pure FFmpeg decoding throughput.
 - `eval_wsfb_sync.c`: Test native `wsdisplay` rendering with PTS / interval adaptive timer sync.
 
-## 4. Roadmap & Future Work for Contributors / AIs
-- [ ] **Audio Support**: Add `/dev/audio` playback with `libswresample` and Audio-Master-Clock A/V synchronization.
-- [ ] **Endianness Testing**: Verify Big-Endian color conversion on PowerPC / Wii U (`AV_PIX_FMT_0RGB`).
-- [ ] **Dirty Region Optimization**: Optimize partial screen updates for OSD / UI overlays.
-- [ ] **pkgsrc Integration**: Package as `multimedia/wsfb-player`.
+## 4. Roadmap & Future Scope
+
+### Short-Term Goals (Application Layer)
+- [ ] **Audio Support**: Implement `/dev/audio` (or `/dev/sound0`) PCM output using `libswresample` with Audio-Master-Clock A/V synchronization.
+- [ ] **Endianness Verification**: Verify Big-Endian color output (`AV_PIX_FMT_0RGB`) on PowerPC architectures (e.g., Nintendo Wii U).
+- [ ] **Dirty Region Optimization**: Optimize UI / OSD rendering to minimize CPU memory-bandwidth overhead.
+- [ ] **pkgsrc Integration**: Package `wsfb-player` as `multimedia/wsfb-player`.
+
+### Long-Term Goals (Kernel / Driver Layer)
+- [ ] **NetBSD Broadcom VC4 DRMKMS Port**:
+  - Port Linux `drivers/gpu/drm/vc4` DRM/KMS driver stack into NetBSD's `sys/external/bsd/drm2`.
+  - Implement FDT attachment glue (`vc4_fdt.c`) for Broadcom BCM2835/2836/2837/2711 (`/soc/gpu`, `/soc/v3d`, `/soc/hdmi`).
+  - Enable `/dev/dri/card0` support on NetBSD/evbarm to unlock hardware-accelerated DRM rendering (`mpv --vo=drm`).
 
