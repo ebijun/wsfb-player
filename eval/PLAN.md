@@ -21,6 +21,10 @@ It runs without X11, Wayland, or legacy OpenMAX APIs.
 ## 4. Roadmap & Future Scope
 
 ### Short-Term Goals (Application Layer)
+- [ ] **Multi-Architecture & Display Compatibility**:
+  - Exclude `-mfpu=neon` on `aarch64` targets in `Makefile` (NEON is standard in ARMv8).
+  - Support `WSDISPLAYIO_LINEBYTES` ioctl in `wsfb_player.c` for accurate stride calculation on x86/amd64 graphics chips.
+  - Allow CLI selection of destination pixel formats (`rgb0`, `bgr0`, `0rgb`) to resolve screen corruption on non-standard framebuffers.
 - [ ] **Audio Support**: Implement `/dev/audio` (or `/dev/sound0`) PCM output using `libswresample` with Audio-Master-Clock A/V synchronization.
 - [ ] **Endianness Verification**: Verify Big-Endian color output (`AV_PIX_FMT_0RGB`) on PowerPC architectures (e.g., Nintendo Wii U).
 - [ ] **Dirty Region Optimization**: Optimize UI / OSD rendering to minimize CPU memory-bandwidth overhead.

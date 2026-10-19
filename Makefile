@@ -7,13 +7,14 @@ CFLAGS ?= -O2
 # NetBSD bsd.sys.mk / BSD make 向けのアーキテクチャ判定
 MACHINE_ARCH != uname -m
 
+# 32-bit ARM 向けのみ -mfpu=neon を追加 (aarch64 は標準で NEON を含むため不要)
 .if ${MACHINE_ARCH} == "evbarm" || ${MACHINE_ARCH} == "earmv7hf" || ${MACHINE_ARCH} == "earmv6hf"
 CFLAGS += -mfpu=neon
 .endif
 
 INCLUDES = -I${PREFIX}/include/ffmpeg7 -I${PREFIX}/include
 LDFLAGS_OPT = -L${PREFIX}/lib/ffmpeg7 -Wl,-R${PREFIX}/lib/ffmpeg7 \
-              -L${PREFIX}/lib -Wl,-R${PREFIX}/lib -Wl,-rpath-link,${PREFIX}/lib
+ -L${PREFIX}/lib -Wl,-R${PREFIX}/lib -Wl,-rpath-link,${PREFIX}/lib
 
 LIBS = -pthread -lavformat -lavcodec -lswscale -lavutil
 

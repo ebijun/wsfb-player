@@ -32,6 +32,13 @@ This document summarizes performance evaluation results conducted on NetBSD/earm
 | **Full Playback (Single Thread)** | `thread_count=1`, No Overlay | 459.15 sec | 7,274 frames | 3,637 frames | 3,637 frames | **7.92 FPS** |
 | **Full Playback (Multi Thread)** | `thread_count=4`, NEON Enabled (`-pthread -mfpu=neon`) | 386.37 sec | 7,274 frames | 3,637 frames | 3,637 frames | **9.41 FPS** |
 
+### 2.3 NetBSD/amd64 & NetBSD/aarch64 Compatibility Notes
+
+1. **aarch64 Build Optimization**:
+   - Compiling without `-mfpu=neon` resolves build warnings/errors on 64-bit ARM while leveraging baseline NEON instructions.
+2. **x86/amd64 Framebuffer Pitch (Stride) Alignment**:
+   - Using `WSDISPLAYIO_LINEBYTES` prevents diagonal video skew and corruption by accounting for hardware line-stride padding.
+
 ---
 
 ## 3. Bottleneck Analysis & Findings

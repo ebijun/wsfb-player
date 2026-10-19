@@ -31,8 +31,18 @@ make
 
 Run with root privileges (required for framebuffer device access):
 
+```bash
+./wsfb-player /path/to/video.mp4 [pixel_format]
+
+```
+
+### Pixel Format Option (for amd64 / x86 framebuffers)
+
+If screen distortion or incorrect colors occur (e.g., on `amd64` GPUs), specify the pixel format explicitly:
+
 ``` bash
-./wsfb-player /path/to/video.mp4
+./wsfb-player /path/to/video.mp4 rgb0
+# Supported options: bgr0 (default), rgb0, 0rgb
 
 ```
 
